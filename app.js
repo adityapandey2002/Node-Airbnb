@@ -11,6 +11,8 @@ const rootDir = require("./utils/pathutil");
 const app = express();
 
 app.use(express.urlencoded());
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(userRouter);
 app.use("/host", hostRouter);
