@@ -4,13 +4,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Added</title>
+  <title>Home Added Successfully - Airbnb</title>
+  <link rel="stylesheet" href="/output.css" />
 </head>
 
-<body>
-  <h1>Home added successfully</h1>
-  <a href="/">Go to home</a>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Navigation Bar -->
+  <nav class="bg-white shadow-lg">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex justify-between items-center h-16">
+        <a href="/" class="text-2xl font-bold text-rose-500">airbnb</a>
+        <div class="flex space-x-4">
+          <a href="/" class="text-gray-700 hover:text-rose-500">Home</a>
+          <a href="/host/add-home"
+            class="bg-rose-500 text-white px-4 py-2 rounded-full hover:bg-rose-600 transition duration-300">
+            Add another home
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
 
+  <main class="max-w-2xl mx-auto px-4 py-16 text-center">
+    <div class="bg-white rounded-xl shadow-md p-8">
+      <div class="mb-6">
+        <!-- Success Icon -->
+        <div class="mx-auto w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+          <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Success!</h1>
+        <p class="text-gray-600 mb-6">Your home has been added successfully</p>
+      </div>
+
+      <a href="/"
+        class="inline-block bg-gradient-to-r from-rose-500 to-rose-600 text-white px-6 py-3 rounded-lg hover:from-rose-600 hover:to-rose-700 transition duration-300">
+        Return to Home
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-100 mt-12 py-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-center text-gray-600">
+        © 2024 Airbnb Clone. Made with Tailwind CSS.
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
