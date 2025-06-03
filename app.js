@@ -4,11 +4,15 @@ const path = require("path");
 // external module
 const express = require("express");
 // local module
-const hostRouter = require("./routes/hostRouter");
+const { hostRouter } = require("./routes/hostRouter");
 const userRouter = require("./routes/userRouter");
 const rootDir = require("./utils/pathutil");
 
 const app = express();
+
+// Set EJS as the view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded({ extended: true }));
@@ -18,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(userRouter);
 app.use("/host", hostRouter);
 app.use((req, res, next) => {
-  res.status(404).sendFile(path.join(rootDir, "views", "404.html"));
+  res.status(404).render('404', { pageTitle: 'Page Not Found - Airbnb' });
 });
 
 PORT = 3000;
