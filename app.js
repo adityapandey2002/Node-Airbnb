@@ -10,7 +10,8 @@ const rootDir = require("./utils/pathutil");
 
 const app = express();
 
-app.use(express.urlencoded());
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(express.urlencoded({ extended: true }));
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
