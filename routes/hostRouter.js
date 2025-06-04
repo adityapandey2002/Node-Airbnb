@@ -4,13 +4,12 @@ const path = require("path");
 // external module
 const express = require("express");
 const hostRouter = express.Router();
+const homesController = require("../controllers/home");
 
 // local module
 const rootDir = require("../utils/pathutil");
 
-hostRouter.get("/add-home", (req, res, next) => {
-  res.render("add-home", { pageTitle: "Add Your Home - Airbnb", current_page: 'add-home' });
-});
+hostRouter.get("/add-home", homesController.getAddHome);
 
 const registeredHomes = [];
 
