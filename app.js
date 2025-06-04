@@ -19,10 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/host', hostRouter);
 app.use(userRouter);
-app.use("/host", hostRouter);
+
 app.use((req, res, next) => {
-  res.status(404).render('404', { pageTitle: 'Page Not Found - Airbnb' });
+  res.status(404).render('404', { pageTitle: 'Page Not Found - Airbnb', current_page: '404' });
 });
 
 PORT = 3000;

@@ -9,7 +9,7 @@ const hostRouter = express.Router();
 const rootDir = require("../utils/pathutil");
 
 hostRouter.get("/add-home", (req, res, next) => {
-  res.render("add-home", { pageTitle: "Add Your Home - Airbnb" });
+  res.render("add-home", { pageTitle: "Add Your Home - Airbnb", current_page: 'add-home' });
 });
 
 const registeredHomes = [];
@@ -23,7 +23,7 @@ hostRouter.post("/add-home", (req, res, next) => {
     photoUrl: photoUrl || 'https://placehold.co/600x400?text=No+Image'
   });
   console.log("Current registered homes:", registeredHomes);
-  res.render("home-added", { pageTitle: "Home Added Successfully - Airbnb" });
+  res.render("home-added", { pageTitle: "Home Added Successfully - Airbnb", current_page: 'home-added' });
 });
 
 exports.hostRouter = hostRouter;

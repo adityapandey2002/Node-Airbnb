@@ -12,7 +12,8 @@ const userRouter = express.Router();
 userRouter.get("/", (req, res, next) => {
   res.render("home", {
     pageTitle: "AIRBNB HOME",
-    registeredHomes
+    registeredHomes,
+    current_page: 'home',
   });
   console.log("Registered Homes are: ", registeredHomes);
 });
