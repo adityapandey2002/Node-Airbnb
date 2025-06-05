@@ -2,20 +2,13 @@
 const path = require("path");
 // external module
 const express = require("express");
+const homesController = require("../controllers/home");
 
 // local module
 const rootDir = require("../utils/pathutil");
-const { registeredHomes } = require("./hostRouter");
 
 const userRouter = express.Router();
 
-userRouter.get("/", (req, res, next) => {
-  res.render("home", {
-    pageTitle: "AIRBNB HOME",
-    registeredHomes,
-    current_page: 'home',
-  });
-  console.log("Registered Homes are: ", registeredHomes);
-});
+userRouter.get("/", homesController.getHomePage);
 
 module.exports = userRouter;

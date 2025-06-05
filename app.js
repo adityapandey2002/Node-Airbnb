@@ -3,6 +3,7 @@ const path = require("path");
 
 // external module
 const express = require("express");
+const errorsController = require("./controllers/errors");
 // local module
 const { hostRouter } = require("./routes/hostRouter");
 const userRouter = require("./routes/userRouter");
@@ -22,9 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/host', hostRouter);
 app.use(userRouter);
 
-app.use((req, res, next) => {
-  res.status(404).render('404', { pageTitle: 'Page Not Found - Airbnb', current_page: '404' });
-});
+app.use(errorsController.pageNotFound);
 
 PORT = 3000;
 app.listen(PORT, () => {
