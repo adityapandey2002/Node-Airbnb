@@ -16,27 +16,19 @@ module.exports = class Home {
   }
 
   save() {
-    registeredHomes.push(this);
-
-    const filePath = path.join(rootDir, 'data', 'homes.json');
-    fs.writeFile(filePath, JSON.stringify(registeredHomes), (err) => {
-      if (err) {
+    Home.fetchAll((registeredHomes) => {
+      registeredHomes.push(this);
+      const filePath = path.join(rootDir, 'data', 'homes.json');
+      fs.writeFile(filePath, JSON.stringify(registeredHomes), (err) => {
         console.log(err);
-      }
+      });
     });
-
-
   }
 
   static fetchAll(callback) {
     const filePath = path.join(rootDir, 'data', 'homes.json');
     fs.readFile(filePath, (err, data) => {
-      console.log("File read: ", err, data);
       callback(!err ? JSON.parse(data) : []);
     });
-
   }
-
-
-
 }

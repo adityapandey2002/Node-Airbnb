@@ -8,6 +8,7 @@ exports.postAddHome = (req, res, next) => {
   const { housename, price, location, rating, photoUrl } = req.body;
   const home = new Home(housename, price, location, rating, photoUrl);
   home.save();
+  res.render('home-added', { pageTitle: 'Home Added Successfully - Airbnb', current_page: 'home-added' });
 };
 
 exports.getHomePage = (req, res, next) => {
