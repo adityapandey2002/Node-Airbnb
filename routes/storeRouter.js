@@ -1,14 +1,17 @@
 // core module
 const path = require("path");
+
 // external module
 const express = require("express");
-const homesController = require("../controllers/home");
+const storeController = require("../controllers/storeController");
 
 // local module
 const rootDir = require("../utils/pathutil");
 
 const storeRouter = express.Router();
 
-storeRouter.get("/", homesController.getHomePage);
+storeRouter.get("/", storeController.getHomePage);
+storeRouter.get("/host/favorites", storeController.getFavoritesPage);
+
 
 module.exports = storeRouter;
