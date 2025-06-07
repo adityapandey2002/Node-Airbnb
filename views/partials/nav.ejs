@@ -2,15 +2,21 @@
 <nav class="bg-white shadow-lg">
   <div class="max-w-6xl mx-auto px-4">
     <div class="flex justify-between items-center h-16">
-      <a href="/" class="text-2xl font-bold text-rose-500">airbnb</a>
+      <a href="/" class="text-2xl font-bold text-rose-500">Airbnb</a>
       <div class="flex space-x-4">
         <a href="/"
-          class="<%= current_page === 'home' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Home</a>
+          class="<%= current_page === 'index' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Airbnb
+          Home</a>
+        <a href="/host/host-homes-list"
+          class="<%= current_page === 'host-homes-list' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Host
+          homes</a>
+        <a href="/homes"
+          class="<%= current_page === 'homes' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Homes</a>
         <a href="/host/add-home"
           class="<%= current_page === 'add-home' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">AddHome</a>
-        <a href="/host/bookings"
+        <a href="/bookings"
           class="<%= current_page === 'bookings' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Bookings</a>
-        <a href="/host/favorites"
+        <a href="/favorites"
           class="<%= current_page === 'favorites' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Favorites</a>
       </div>
     </div>

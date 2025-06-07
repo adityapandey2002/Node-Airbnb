@@ -10,8 +10,10 @@ const rootDir = require("../utils/pathutil");
 
 const storeRouter = express.Router();
 
-storeRouter.get("/", storeController.getHomePage);
-storeRouter.get("/host/favorites", storeController.getFavoritesPage);
+storeRouter.get("/", storeController.getIndexPage);
+storeRouter.get("/homes", storeController.getHomesPage);
+storeRouter.get("/favorites", storeController.getFavoritesPage);
+storeRouter.get("/bookings", storeController.getBookingsPage);
 
 
 module.exports = storeRouter;
