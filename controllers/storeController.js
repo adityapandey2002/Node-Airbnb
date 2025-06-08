@@ -14,7 +14,7 @@ exports.getIndexPage = (req, res, next) => {
 
 
 exports.getHomesPage = (req, res, next) => {
-  Home.fetchAll((registeredHomes) => res.render("store/homes", {
+  Home.fetchAll((registeredHomes) => res.render("store/homes-list", {
     pageTitle: "HOMES",
     registeredHomes,
     current_page: 'homes',
