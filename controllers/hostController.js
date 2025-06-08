@@ -47,3 +47,14 @@ exports.postEditHome = (req, res, next) => {
   home.save();
   res.redirect("/host/host-homes-list");
 };
+
+exports.postDeleteHome = (req, res, next) => {
+  const homeId = req.body.homeId;
+  Home.deleteById(homeId, (error) => {
+    if (error) {
+      console.log("Error deleting home:", error);
+      return res.status(500).redirect('/host/host-homes-list');
+    }
+    res.redirect("/host/host-homes-list");
+  });
+};

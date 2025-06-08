@@ -42,10 +42,18 @@ module.exports = class Home {
     });
   }
 
-  static findById(id, callback) {
-    this.fetchAll((Homes) => {
-      const home = Homes.find((home) => home.id === id);
-      callback(home);
-    })
+  static findById(id, cb) {
+    getHomesFromFile(homes => {
+      const home = homes.find(h => h.id === id);
+      cb(home);
+    });
   }
+
+  static deleteById(id, callback) {
+    this.fetchAll((homes) => {
+      const updatedHomes = homes.filter((home) => home.id !== id);
+      fs.writeFile(path.join(rootDir, "data", "homes.json"), JSON.stringify(updatedHomes), callback);
+    });
+  }
+
 }
