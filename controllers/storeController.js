@@ -34,13 +34,19 @@ exports.getSpecificHome = (req, res, next) => {
 };
 
 
-exports.getFavoritesPage = (req, res, next) => {
-  Home.fetchAll((registeredHomes) => res.render("store/favorites-list", {
-    pageTitle: "FAVORITES",
+exports.getFavouritesPage = (req, res, next) => {
+  Home.fetchAll((registeredHomes) => res.render("store/favourites-list", {
+    pageTitle: "FAVOuRITES",
     registeredHomes,
-    current_page: 'favorites',
+    current_page: 'favourites',
   })
   )
+};
+
+exports.postAddToFavouritesPage = (req, res, next) => {
+  console.log("Came to add Favorite with id ", req.body);
+
+  res.render('/favourites', { pageTitle: 'Added to Favourites', current_page: 'Your Favourites' });
 };
 
 exports.getBookingsPage = (req, res, next) => {
