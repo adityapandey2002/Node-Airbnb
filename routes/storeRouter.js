@@ -12,7 +12,7 @@ const storeRouter = express.Router();
 
 storeRouter.get("/", storeController.getIndexPage);
 storeRouter.get("/homes", storeController.getHomesPage);
-storeRouter.get("/homes/:homeId", homeController.getSpecificHome):
+storeRouter.get("/homes/:homeId", storeController.getSpecificHome);
 storeRouter.get("/favorites", storeController.getFavoritesPage);
 storeRouter.get("/bookings", storeController.getBookingsPage);
 

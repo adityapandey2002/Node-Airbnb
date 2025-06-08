@@ -32,4 +32,11 @@ module.exports = class Home {
       callback(!err ? JSON.parse(data) : []);
     });
   }
+
+  static findById(id, callback) {
+    this.fetchAll((Homes) => {
+      const home = Homes.find((home) => home.id === id);
+      callback(home);
+    })
+  }
 }
