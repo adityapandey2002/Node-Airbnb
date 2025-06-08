@@ -37,4 +37,13 @@ exports.postAddHome = (req, res, next) => {
   const home = new Home(housename, price, location, rating, photoUrl);
   home.save();
   res.render('host/home-added', { pageTitle: 'Home Added Successfully - Airbnb', current_page: 'home-added' });
-};  
+};
+
+exports.postEditHome = (req, res, next) => {
+  console.log(req.body);
+  const { id, housename, price, location, rating, photoUrl } = req.body;
+  const home = new Home(housename, price, location, rating, photoUrl);
+  home.id = id;
+  home.save();
+  res.redirect("/host/host-homes-list");
+};

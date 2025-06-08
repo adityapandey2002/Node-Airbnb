@@ -13,6 +13,7 @@ hostRouter.get("/add-home", hostController.getAddHome);
 
 hostRouter.get("/host-homes-list", hostController.getHostHomesPage);
 hostRouter.get("/edit-home/:homeId", hostController.getEditHomePage);
+hostRouter.post("/edit-home", hostController.postEditHome);
 
 
 hostRouter.post("/add-home", hostController.postAddHome);
