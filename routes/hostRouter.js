@@ -12,6 +12,7 @@ const rootDir = require("../utils/pathutil");
 hostRouter.get("/add-home", hostController.getAddHome);
 
 hostRouter.get("/host-homes-list", hostController.getHostHomesPage);
+hostRouter.get("/edit-home/:homeId", hostController.getEditHomePage);
 
 
 hostRouter.post("/add-home", hostController.postAddHome);

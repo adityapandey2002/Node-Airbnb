@@ -9,60 +9,72 @@
 
         <!-- Registered Homes -->
         <div class="mt-12">
-
           <div class="grid md:grid-cols-2 gap-8">
             <% if (registeredHomes && registeredHomes.length> 0) { %>
               <% registeredHomes.forEach(function(home) { %>
-                <div
-                  class="relative grid gap-10 rounded-2xl bg-white p-4 pb-2 ring ring-gray-950/5 @min-[theme(--breakpoint-lg)]:grid-cols-2 @min-[theme(--breakpoint-lg)]:px-20 @min-[theme(--breakpoint-lg)]:py-8 @min-[theme(--breakpoint-lg)]:pb-10 dark:bg-gray-950 dark:ring-white/10">
-                  <div class="flex flex-1 flex-col">
-                    <div
-                      class="relative mb-4 overflow-hidden rounded-lg @max-[theme(--breakpoint-xl)]:-mx-4 @max-[theme(--breakpoint-xl)]:-mt-4 @min-[theme(--breakpoint-lg)]:hidden">
-                      <div class="grid grid-cols-4 grid-rows-2 gap-2 @max-[theme(--breakpoint-lg)]:hidden">
-                        <img alt="" src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
-                          class="col-span-4 h-[150px] w-full rounded-lg bg-gray-950/5 object-cover @min-[theme(--breakpoint-xl)]:col-span-2 @min-[theme(--breakpoint-xl)]:row-span-2 @min-[theme(--breakpoint-xl)]:aspect-square @min-[theme(--breakpoint-xl)]:h-[308px]">
-                        <img alt="" src="https://cdn.pixabay.com/photo/2017/02/07/18/16/living-room-2046668_1280.jpg"
-                          class="col-span-2 h-[150px] w-full rounded-lg bg-gray-950/5 @max-[theme(--breakpoint-xl)]:aspect-square @min-[theme(--breakpoint-xl)]:col-span-1">
-                        <img alt="" src="https://cdn.pixabay.com/photo/2013/07/04/18/33/western-143213_1280.jpg"
-                          class="col-span-2 h-[150px] w-full rounded-lg bg-gray-950/5 @max-[theme(--breakpoint-xl)]:aspect-square @min-[theme(--breakpoint-xl)]:col-span-1">
-                        <div
-                          class="absolute inset-0 flex flex-col justify-end gap-2 bg-linear-to-b from-transparent via-transparent to-gray-950 p-6 @min-[theme(--breakpoint-sm)]:hidden">
+                <div class="block transform transition-all duration-300 hover:scale-[1.02]">
+                  <div
+                    class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl border border-gray-100">
+                    <div class="p-4">
+                      <!-- Image Grid -->
+                      <a href="/homes/<%= home.id %>" class="block">
+                        <div class="grid grid-cols-4 gap-3 mb-4">
+                          <div class="col-span-4 md:col-span-2 md:row-span-2 overflow-hidden rounded-xl">
+                            <img alt="" src="https://cdn.pixabay.com/photo/2017/04/10/22/28/residence-2219972_1280.jpg"
+                              class="h-[200px] md:h-[320px] w-full object-cover hover:scale-110 transition-transform duration-700">
+                          </div>
+                          <div class="hidden md:block col-span-2 overflow-hidden rounded-xl">
+                            <img alt=""
+                              src="https://cdn.pixabay.com/photo/2017/02/07/18/16/living-room-2046668_1280.jpg"
+                              class="h-[156px] w-full object-cover hover:scale-110 transition-transform duration-700">
+                          </div>
+                          <div class="hidden md:block col-span-2 overflow-hidden rounded-xl">
+                            <img alt="" src="https://cdn.pixabay.com/photo/2013/07/04/18/33/western-143213_1280.jpg"
+                              class="h-[156px] w-full object-cover hover:scale-110 transition-transform duration-700">
+                          </div>
                         </div>
-                      </div>
-                      <span class="font-medium text-gray-500 @max-[theme(--breakpoint-sm)]:hidden dark:text-gray-500">
-                        <%= home.houseName %>
-                      </span>
-                      <div
-                        class="grid grid-cols-1 gap-4 @min-[theme(--breakpoint-sm)]:grid-cols-[1fr_auto] @min-[theme(--breakpoint-xl)]:grid-cols-1">
-                        <div>
-                          <span
-                            class="mt-2 text-3xl font-semibold text-gray-950 @max-[theme(--breakpoint-sm)]:hidden dark:text-white">
-                            <%= home.price %>
+                      </a>
+
+                      <!-- Content -->
+                      <div class="space-y-4">
+                        <div class="flex items-start justify-between">
+                          <a href="/homes/<%= home.id %>" class="block">
+                            <h3 class="text-xl font-semibold text-gray-800 hover:text-pink-600 transition-colors">
+                              <%= home.houseName %>
+                            </h3>
+                          </a>
+
+                          <%- include('../partials/favourite', {home: home}) %>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                          <span class="flex items-center gap-1 text-pink-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                              aria-hidden="true" class="w-4 h-4">
+                              <path fill-rule="evenodd"
+                                d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
+                                clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="font-medium">
+                              <%= home.rating %>
+                            </span>
                           </span>
-                          <span class="mt-2 flex items-center gap-2">
-                            <!-- Star Icon and Rating Number Container -->
-                            <span class="flex items-center gap-1 text-pink-600 dark:text-pink-500">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-                                aria-hidden="true" class="w-4 h-4">
-                                <path fill-rule="evenodd"
-                                  d="M8 1.75a.75.75 0 0 1 .692.462l1.41 3.393 3.664.293a.75.75 0 0 1 .428 1.317l-2.791 2.39.853 3.575a.75.75 0 0 1-1.12.814L7.998 12.08l-3.135 1.915a.75.75 0 0 1-1.12-.814l.852-3.574-2.79-2.39a.75.75 0 0 1 .427-1.318l3.663-.293 1.41-3.393A.75.75 0 0 1 8 1.75Z"
-                                  clip-rule="evenodd"></path>
-                              </svg>
-                              <span class="text-sm font-medium">2.66</span>
-                            </span>
-                            <!-- Reviews and Location Info -->
-                            <span class="text-sm text-gray-500">(128 reviews)</span>
-                            <span class="text-pink-300 dark:text-gray-600">·</span>
-                            <span class="text-sm font-medium text-pink-600 dark:text-pink-500">
-                              <%= home.location %>
-                            </span>
+                          <span class="text-sm text-gray-500">(128 reviews)</span>
+                          <span class="text-gray-300">·</span>
+                          <span class="text-sm font-medium text-gray-800">
+                            <%= home.location %>
                           </span>
                         </div>
-                        <div class="@min-[theme(--breakpoint-lg)]:hidden">
-                          <button type="button"
-                            class="w-full rounded-lg bg-pink-500 px-3 py-2 text-sm/6 font-bold text-white @min-[theme(--breakpoint-sm)]:w-auto">
-                            Check availability
-                          </button>
+
+                        <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
+                          <div>
+                            <span class="text-2xl font-bold text-gray-900">₹<%= home.price %></span>
+                            <span class="text-gray-500 text-sm">/night</span>
+                          </div>
+                          <a href="/bookings/cancel/<%= home.id %>"
+                            class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-rose-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:from-pink-600 hover:to-rose-600 transition-all duration-300">
+                            Cancel Booking
+                          </a>
                         </div>
                       </div>
                     </div>
@@ -76,13 +88,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                           d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                       </svg>
-                      <p class="text-gray-500 text-lg">No homes available yet. Be the first to add one!</p>
+                      <p class="text-gray-500 text-lg">No bookings yet. Start exploring homes to book your stay!</p>
                     </div>
                     <% } %>
           </div>
         </div>
-
-
       </main>
 
       <!-- Footer -->

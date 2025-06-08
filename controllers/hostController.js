@@ -2,7 +2,7 @@ const Home = require("../models/home");
 
 
 exports.getAddHome = (req, res, next) => {
-  res.render("host/add-home", { pageTitle: "Add Your Home - Airbnb", current_page: 'add-home' });
+  res.render("host/edit-home", { pageTitle: "Add Your Home - Airbnb", current_page: 'add-home', editing: false });
 };
 
 exports.getHostHomesPage = (req, res, next) => {
@@ -12,6 +12,24 @@ exports.getHostHomesPage = (req, res, next) => {
     current_page: 'host-homes-list',
   })
   )
+};
+
+exports.getEditHomePage = (req, res, next) => {
+  const editing = req.query.editing === 'true';
+  const homeId = req.params.homeId;
+  Home.findById(homeId, (home) => {
+    if (!home) {
+      return res.redirect("/host/host-homes-list");
+    } else {
+
+      res.render("host/edit-home", {
+        pageTitle: "Edit Home",
+        current_page: 'edit-home',
+        editing: editing,
+        home: home,
+      });
+    }
+  });
 };
 
 exports.postAddHome = (req, res, next) => {
