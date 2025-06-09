@@ -2,7 +2,7 @@ const Home = require("../models/home");
 
 
 exports.getAddHome = (req, res, next) => {
-  res.render("host/edit-home", { pageTitle: "Add Your Home - Airbnb", current_page: 'add-home', editing: false });
+  res.render("host/edit-home", { pageTitle: "Add Your Home - Airbnb", current_page: 'add-home', editing: false, home: null });
 };
 
 exports.getHostHomesPage = (req, res, next) => {
@@ -36,8 +36,8 @@ exports.postAddHome = (req, res, next) => {
   const { housename, price, location, rating, photoUrl } = req.body;
   const home = new Home(housename, price, location, rating, photoUrl);
   home.save();
-  res.render('host/home-added', { pageTitle: 'Home Added Successfully - Airbnb', current_page: 'home-added' });
-};
+  res.redirect('/host/host-homes-list');
+}
 
 exports.postEditHome = (req, res, next) => {
   console.log(req.body);

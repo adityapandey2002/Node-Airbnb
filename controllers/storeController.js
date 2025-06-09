@@ -59,6 +59,16 @@ exports.postAddToFavouritesPage = (req, res, next) => {
   });
 };
 
+
+exports.postRemoveFromFavouritesPage = (req, res, next) => {
+  const homeId = req.params.homeId;
+  Favourites.deleteById(homeId, error => {
+    if (error) {
+      console.log("Error while removing from favourites", error)
+    }
+    res.redirect("/favorites");
+  })
+}
 exports.getBookingsPage = (req, res, next) => {
   Home.fetchAll((registeredHomes) => res.render("store/bookings", {
     pageTitle: "BOOKINGS",

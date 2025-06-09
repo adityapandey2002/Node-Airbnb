@@ -42,10 +42,10 @@ module.exports = class Home {
     });
   }
 
-  static findById(id, cb) {
-    getHomesFromFile(homes => {
-      const home = homes.find(h => h.id === id);
-      cb(home);
+  static findById(id, callback) {
+    Home.fetchAll(homes => {
+      const home = homes.find(home => home.id === id);
+      callback(home);
     });
   }
 
