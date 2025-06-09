@@ -66,7 +66,7 @@ exports.postRemoveFromFavouritesPage = (req, res, next) => {
     if (error) {
       console.log("Error while removing from favourites", error)
     }
-    res.redirect("/favorites");
+    res.redirect("/favourites");
   })
 }
 exports.getBookingsPage = (req, res, next) => {

@@ -68,7 +68,7 @@
                             <span class="text-2xl font-bold text-gray-900">₹<%= home.price %></span>
                             <span class="text-gray-500 text-sm">/night</span>
                           </div>
-                          <form action="/favourites/delete<%=home.id%>" method="POST" class="inline">
+                          <form action="/favourites/delete/<%=home.id%>" method="POST" class="inline">
                             <input type="hidden" name="homeId" value="<%= home.id %>">
                             <button type="submit"
                               class="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-red-500 to-rose-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:from-red-600 hover:to-rose-600 transition-all duration-300">

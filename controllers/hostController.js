@@ -40,7 +40,6 @@ exports.postAddHome = (req, res, next) => {
 }
 
 exports.postEditHome = (req, res, next) => {
-  console.log(req.body);
   const { id, housename, price, location, rating, photoUrl } = req.body;
   const home = new Home(housename, price, location, rating, photoUrl);
   home.id = id;
