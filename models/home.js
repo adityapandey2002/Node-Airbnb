@@ -12,19 +12,19 @@ module.exports = class Home {
   }
 
   save() {
-    Home.fetchAll((registeredHomes) => {
 
-    }
+  }
 
   static fetchAll(callback) {
 
-    }
+  }
 
   static findById(id, callback) {
 
-    }
+  }
 
   static deleteById(id, callback) {
 
 
-    }
+  }
+}
