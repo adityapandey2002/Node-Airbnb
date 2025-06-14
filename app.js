@@ -7,8 +7,6 @@ const errorsController = require("./controllers/errors");
 // local module
 const { hostRouter } = require("./routes/hostRouter");
 const storeRouter = require("./routes/storeRouter");
-const rootDir = require("./utils/pathutil");
-const mongoConnect = require("./utils/database");
 const { default: mongoose } = require("mongoose");
 
 const app = express();
