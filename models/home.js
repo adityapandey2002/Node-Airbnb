@@ -26,6 +26,7 @@ const homeSchema = new mongoose.Schema({
   }
 });
 
+
 homeSchema.pre('findOneAndDelete', async function (next) {
   const homeId = this.getQuery()._id;
   await favourites.deleteMany({ houseId: homeId });
@@ -34,67 +35,3 @@ homeSchema.pre('findOneAndDelete', async function (next) {
 });
 
 module.exports = mongoose.model('Home', homeSchema);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// module.exports = class Home {
-
-//   constructor(houseName, price, location, rating, photoUrl) {
-//     this.houseName = houseName;
-//     this.price = price;
-//     this.location = location;
-//     this.rating = rating;
-//     this.photoUrl = photoUrl;
-//   }
-
-//   save() {
-
-//   }
-
-//   static find(callback) {
-
-//   }
-
-//   static findById(id, callback) {
-
-//   }
-
-//   static deleteById(id, callback) {
-
-
-//   }
-// }
