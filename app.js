@@ -4,6 +4,10 @@ const path = require("path");
 // external module
 const express = require("express");
 const errorsController = require("./controllers/errors");
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+const DB_PATH = "mongodb+srv://adityapandeyadu:adityapandeyadu@cluster0.gyjb8sm.mongodb.net/airbnb?retryWrites=true&w=majority&appName=Cluster0";
+
 // local module
 const { hostRouter } = require("./routes/hostRouter");
 const storeRouter = require("./routes/storeRouter");
@@ -21,15 +25,29 @@ app.use(express.urlencoded({ extended: true }));
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-  req.isLoggedIn = req.get('Cookie') ? req.get('Cookie').split('=')[1] === 'true' : false;
-  next();
-})
+const store = new MongoDBStore({
+  uri: DB_PATH,
+  collection: 'sessions',
+}
+)
+
+app.use(session({
+  secret: "Aditya Pandey is a coder.",
+  resave: false,
+  saveUninitialized: true,
+  store,
+}));
+
+
+// app.use((req, res, next) => {
+//   req.session.isLoggedIn = req.session.isLoggedIn;
+//   next();
+// })
 
 app.use(authRouter);
 app.use('/host', hostRouter);
 app.use('/host', (req, res, next) => {
-  if (req.isLoggedIn) {
+  if (req.session.isLoggedIn) {
     next();
   } else {
     res.redirect('/login');
@@ -42,7 +60,7 @@ app.use(errorsController.pageNotFound);
 
 
 const PORT = 3000;
-const DB_PATH = "mongodb+srv://adityapandeyadu:adityapandeyadu@cluster0.gyjb8sm.mongodb.net/airbnb?retryWrites=true&w=majority&appName=Cluster0"
+
 mongoose.connect(DB_PATH)
   .then(() => {
     console.log("Connected to MongoDB");

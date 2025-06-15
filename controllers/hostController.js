@@ -2,7 +2,7 @@ const Home = require("../models/home");
 
 
 exports.getAddHome = (req, res, next) => {
-  res.render("host/edit-home", { pageTitle: "Add Your Home - Airbnb", current_page: 'add-home', editing: false, home: null, isLoggedIn: req.isLoggedIn });
+  res.render("host/edit-home", { pageTitle: "Add Your Home - Airbnb", current_page: 'add-home', editing: false, home: null, isLoggedIn: req.session.isLoggedIn });
 };
 
 exports.getHostHomesPage = (req, res, next) => {
@@ -12,7 +12,7 @@ exports.getHostHomesPage = (req, res, next) => {
         pageTitle: "Host Homes",
         registeredHomes,
         current_page: 'host-homes-list',
-        isLoggedIn: req.isLoggedIn
+        isLoggedIn: req.session.isLoggedIn
       });
     })
     .catch(err => next(err));
@@ -31,7 +31,7 @@ exports.getEditHomePage = (req, res, next) => {
         current_page: 'edit-home',
         editing: editing,
         home: home,
-        isLoggedIn: req.isLoggedIn
+        isLoggedIn: req.session.isLoggedIn
       });
     })
     .catch(err => next(err));
