@@ -20,6 +20,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use((req, res, next) => {
+  req.isLoggedIn = req.get('Cookie') ? req.get('Cookie').split('=')[1] === 'true' : false;
+  next();
+})
+
 app.use(authRouter);
 app.use('/host', hostRouter);
 app.use('/host', (req, res, next) => {

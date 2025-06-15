@@ -7,6 +7,16 @@ exports.getAuthPage = (req, res, next) => {
 };
 
 exports.postLogin = (req, res, next) => {
-  req.isLoggedIn = true;
+  res.cookie("isLoggedIn", true);
   res.redirect("/");
+}
+exports.postLogout = (req, res, next) => {
+  // Clear the authentication cookie
+  res.clearCookie('isLoggedIn');
+
+  // Clear any other session data if needed
+  req.session = null;
+
+  // Redirect to login page
+  res.redirect('/login');
 }

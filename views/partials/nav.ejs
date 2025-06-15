@@ -19,9 +19,13 @@
             class="<%= current_page === 'bookings' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Bookings</a>
           <a href="/favourites"
             class="<%= current_page === 'favourites' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Favourites</a>
-          <% } %>
+          <form action="/logout" method="POST" class="inline">
+            <button type="submit" class="text-gray-700 hover:text-rose-500">Logout</button>
+          </form>
+          <% } else { %>
             <a href="/login"
               class="<%= current_page === 'login' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Login</a>
+            <% } %>
       </div>
     </div>
   </div>
