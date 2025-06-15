@@ -7,19 +7,21 @@
         <a href="/"
           class="<%= current_page === 'index' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Airbnb
           Home</a>
-        <a href="/host/host-homes-list"
-          class="<%= current_page === 'host-homes-list' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Host
-          homes</a>
-        <a href="/homes"
-          class="<%= current_page === 'homes' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Homes</a>
-        <a href="/host/add-home"
-          class="<%= current_page === 'add-home' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">AddHome</a>
-        <a href="/bookings"
-          class="<%= current_page === 'bookings' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Bookings</a>
-        <a href="/favourites"
-          class="<%= current_page === 'favourites' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Favourites</a>
-        <a href="/login"
-          class="<%= current_page === 'login' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Login</a>
+        <% if(isLoggedIn) { %>
+          <a href="/host/host-homes-list"
+            class="<%= current_page === 'host-homes-list' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Host
+            homes</a>
+          <a href="/homes"
+            class="<%= current_page === 'homes' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Homes</a>
+          <a href="/host/add-home"
+            class="<%= current_page === 'add-home' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">AddHome</a>
+          <a href="/bookings"
+            class="<%= current_page === 'bookings' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Bookings</a>
+          <a href="/favourites"
+            class="<%= current_page === 'favourites' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Favourites</a>
+          <% } %>
+            <a href="/login"
+              class="<%= current_page === 'login' ? 'text-rose-500' : 'text-gray-700 hover:text-rose-500' %>">Login</a>
       </div>
     </div>
   </div>

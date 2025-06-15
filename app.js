@@ -22,6 +22,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(authRouter);
 app.use('/host', hostRouter);
+app.use('/host', (req, res, next) => {
+  if (req.isLoggedIn) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+})
 app.use(storeRouter);
 
 app.use(errorsController.pageNotFound);

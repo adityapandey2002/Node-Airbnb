@@ -10,6 +10,7 @@ exports.getIndexPage = (req, res, next) => {
         pageTitle: "Airbnb Home",
         registeredHomes,
         current_page: 'index',
+        isLoggedIn: req.isLoggedIn
       });
     })
     .catch(err => next(err));
@@ -22,6 +23,7 @@ exports.getHomesPage = (req, res, next) => {
         pageTitle: "HOMES",
         registeredHomes,
         current_page: 'homes',
+        isLoggedIn: req.isLoggedIn
       });
     })
     .catch(err => next(err));
@@ -34,7 +36,8 @@ exports.getSpecificHome = (req, res, next) => {
       res.render("store/home-specific", {
         pageTitle: home ? `${home.houseName} - Airbnb` : "Home Not Found",
         home,
-        current_page: 'homes'
+        current_page: 'homes',
+        isLoggedIn: req.isLoggedIn
       });
     })
     .catch(err => next(err));
@@ -50,6 +53,7 @@ exports.getFavouritesPage = (req, res, next) => {
         favouritesWithDetails: favouriteHomes,
         pageTitle: "MY FAVOURITES",
         current_page: 'favourites',
+        isLoggedIn: req.isLoggedIn
       });
     });
 };
@@ -97,6 +101,7 @@ exports.getBookingsPage = (req, res, next) => {
         pageTitle: "BOOKINGS",
         registeredHomes,
         current_page: 'bookings',
+        isLoggedIn: req.isLoggedIn
       });
     })
     .catch(err => next(err));
