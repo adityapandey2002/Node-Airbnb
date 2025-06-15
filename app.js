@@ -8,6 +8,7 @@ const errorsController = require("./controllers/errors");
 const { hostRouter } = require("./routes/hostRouter");
 const storeRouter = require("./routes/storeRouter");
 const { default: mongoose } = require("mongoose");
+const { authRouter } = require("./routes/authRouter");
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(authRouter);
 app.use('/host', hostRouter);
 app.use(storeRouter);
 
