@@ -1,3 +1,5 @@
+const { validationResult, check } = require("express-validator");
+
 exports.getAuthPage = (req, res, next) => {
   res.render("auth/login", {
     pageTitle: "Login",
