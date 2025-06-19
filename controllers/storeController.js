@@ -46,43 +46,6 @@ exports.getSpecificHome = (req, res, next) => {
     .catch(err => next(err));
 };
 
-exports.getFavouritesPage = async (req, res, next) => {
-  const userId = req.session.user._id;
-  const user = await User.findById(userId).populate('favourites');
-  res.render("store/favourites-list", {
-    favouritesWithDetails: user.favourites,
-    pageTitle: "MY FAVOURITES",
-    current_page: 'favourites',
-    isLoggedIn: req.session.isLoggedIn,
-    user: req.session.user
-  });
-};
-
-
-exports.postAddToFavouritesPage = async (req, res, next) => {
-  const homeId = req.body.homeId;
-  const userId = req.session.user._id;
-  const user = await User.findById(userId);
-  if (!user.favourites.includes(homeId)) {
-    user.favourites.push(homeId);
-    await user.save();
-  }
-  if (!homeId) {
-    console.log("Error: No homeId provided");
-    return res.status(400).redirect("/favourites");
-  }
-  res.redirect("/favourites");
-};
-
-exports.postRemoveFromFavouritesPage = async (req, res, next) => {
-  const homeId = req.params.homeId;
-  const userId = req.session.user._id;
-  const user = await User.findById(userId);
-  user.favourites = user.favourites.filter(id => id.toString() !== homeId);
-  await user.save();
-  res.redirect("/favourites");
-};
-
 
 exports.getBookingsPage = (req, res, next) => {
   Home.find()
