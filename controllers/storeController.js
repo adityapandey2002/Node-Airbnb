@@ -74,6 +74,15 @@ exports.postAddToFavouritesPage = async (req, res, next) => {
   res.redirect("/favourites");
 };
 
+exports.postRemoveFromFavouritesPage = async (req, res, next) => {
+  const homeId = req.params.homeId;
+  const userId = req.session.user._id;
+  const user = await User.findById(userId);
+  user.favourites = user.favourites.filter(id => id.toString() !== homeId);
+  await user.save();
+  res.redirect("/favourites");
+};
+
 
 exports.getBookingsPage = (req, res, next) => {
   Home.find()
