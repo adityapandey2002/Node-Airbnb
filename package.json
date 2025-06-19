@@ -21,7 +21,8 @@
     "mongodb": "^6.17.0",
     "mongoose": "^8.15.2",
     "mysql2": "^3.14.1",
-    "session": "^0.1.0"
+    "session": "^0.1.0",
+    "validator": "^13.15.15"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",
