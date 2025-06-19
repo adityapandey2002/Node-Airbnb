@@ -1,4 +1,6 @@
 const { validationResult, check } = require("express-validator");
+const User = require("../models/user");
+const bcrypt = require('bcryptjs');
 
 exports.getAuthPage = (req, res, next) => {
   res.render("auth/login", {
@@ -69,10 +71,10 @@ exports.postSignUp = [
   check('userType')
     .notEmpty()
     .withMessage('User type is required')
-    .isIn(['guest', 'host'])
+    .isIn(['GUEST', 'HOST'])
     .withMessage('Invalid user type'),
 
-  check('termsAccepted')
+  check('terms')
     .notEmpty()
     .withMessage('You must accept the terms and conditions')
     .custom((value) => {
@@ -82,8 +84,10 @@ exports.postSignUp = [
       return true;
     }),
 
+
+
   (req, res, next) => {
-    const { firstName, lastName, email, userType } = req.body;
+    const { firstName, lastName, email, password, userType } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).render('auth/signup', {
@@ -94,7 +98,23 @@ exports.postSignUp = [
         oldInput: { firstName, lastName, email, userType },
       });
     }
-    res.redirect('/login');
+
+    bcrypt.hash(password, 12).then(hashedpassword => {
+      const user = new User({ firstName, lastName, email, password: hashedpassword, userType });
+      return user.save();
+    })
+      .then(() => {
+        res.redirect('/login');
+      })
+      .catch(err => {
+        return res.status(422).render('auth/signup', {
+          pageTitle: 'SignUp',
+          current_page: 'SignUp',
+          isLoggedIn: false,
+          errors: ["User already exists", err.message],
+          oldInput: { firstName, lastName, email, password: '', userType },
+        });
+      })
   }
 ];
 
