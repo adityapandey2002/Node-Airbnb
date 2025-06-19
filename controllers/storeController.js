@@ -1,7 +1,5 @@
-
-
-const Favourites = require("../models/favourites");
 const Home = require("../models/home");
+const User = require("../models/user");
 
 exports.getIndexPage = (req, res, next) => {
   console.log("session value: ", req.session);
@@ -11,7 +9,8 @@ exports.getIndexPage = (req, res, next) => {
         pageTitle: "Airbnb Home",
         registeredHomes,
         current_page: 'index',
-        isLoggedIn: req.session.isLoggedIn
+        isLoggedIn: req.session.isLoggedIn,
+        user: req.session.user
       });
     })
     .catch(err => next(err));
@@ -25,7 +24,8 @@ exports.getHomesPage = (req, res, next) => {
         pageTitle: "HOMES",
         registeredHomes,
         current_page: 'homes',
-        isLoggedIn: req.session.isLoggedIn
+        isLoggedIn: req.session.isLoggedIn,
+        user: req.session.user
       });
     })
     .catch(err => next(err));
@@ -39,62 +39,50 @@ exports.getSpecificHome = (req, res, next) => {
         pageTitle: home ? `${home.houseName} - Airbnb` : "Home Not Found",
         home,
         current_page: 'homes',
-        isLoggedIn: req.session.isLoggedIn
+        isLoggedIn: req.session.isLoggedIn,
+        user: req.session.user
       });
     })
     .catch(err => next(err));
 };
 
-exports.getFavouritesPage = (req, res, next) => {
-  Favourites.find()
-    .populate('houseId')
-    .then((favourites) => {
-      const favouriteHomes = favourites.map((fav) => fav.houseId);
-
-      res.render("store/favourites-list", {
-        favouritesWithDetails: favouriteHomes,
-        pageTitle: "MY FAVOURITES",
-        current_page: 'favourites',
-        isLoggedIn: req.session.isLoggedIn
-      });
-    });
+exports.getFavouritesPage = async (req, res, next) => {
+  const userId = req.session.user._id;
+  const user = await User.findById(userId).populate('favourites');
+  res.render("store/favourites-list", {
+    favouritesWithDetails: user.favourites,
+    pageTitle: "MY FAVOURITES",
+    current_page: 'favourites',
+    isLoggedIn: req.session.isLoggedIn,
+    user: req.session.user
+  });
 };
 
-exports.postAddToFavouritesPage = (req, res, next) => {
+
+exports.postAddToFavouritesPage = async (req, res, next) => {
   const homeId = req.body.homeId;
+  const userId = req.session.user._id;
+  const user = await User.findById(userId);
+  if (!user.favourites.includes(homeId)) {
+    user.favourites.push(homeId);
+    await user.save();
+  }
   if (!homeId) {
     console.log("Error: No homeId provided");
     return res.status(400).redirect("/favourites");
   }
-
-  Favourites.findOne({ houseId: homeId })
-    .then(existingFav => {
-      if (existingFav) {
-        return Promise.resolve(); // Already in favorites
-      }
-      const fav = new Favourites({ houseId: homeId });
-      return fav.save();
-    })
-    .then(() => {
-      res.redirect("/favourites");
-    })
-    .catch(err => {
-      console.log("Error while marking favourites:", err);
-      res.status(500).redirect("/favourites");
-    });
+  res.redirect("/favourites");
 };
 
-exports.postRemoveFromFavouritesPage = (req, res, next) => {
+exports.postRemoveFromFavouritesPage = async (req, res, next) => {
   const homeId = req.params.homeId;
-  Favourites.findOneAndDelete({ houseId: homeId })
-    .then(() => {
-      res.redirect("/favourites");
-    })
-    .catch(err => {
-      console.log("Error while removing from favourites:", err);
-      res.status(500).redirect("/favourites");
-    });
+  const userId = req.session.user._id;
+  const user = await User.findById(userId);
+  user.favourites = user.favourites.filter(id => id.toString() !== homeId);
+  await user.save();
+  res.redirect("/favourites");
 };
+
 
 exports.getBookingsPage = (req, res, next) => {
   Home.find()
@@ -103,7 +91,8 @@ exports.getBookingsPage = (req, res, next) => {
         pageTitle: "BOOKINGS",
         registeredHomes,
         current_page: 'bookings',
-        isLoggedIn: req.session.isLoggedIn
+        isLoggedIn: req.session.isLoggedIn,
+        user: req.session.user
       });
     })
     .catch(err => next(err));

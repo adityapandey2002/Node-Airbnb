@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const userSchema = mongoose.Schema({
   firstName: {
     type: String,
@@ -19,7 +18,13 @@ const userSchema = mongoose.Schema({
     type: String,
     enum: ['GUEST', 'HOST'],
     default: 'GUEST'
-  }
+  },
+  favourites: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Home'
+    }
+  ]
 })
 
 

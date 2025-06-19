@@ -8,29 +8,37 @@
           class="<%= current_page === 'index' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Airbnb
           Home</a>
         <% if(isLoggedIn) { %>
-          <a href="/host/host-homes-list"
-            class="<%= current_page === 'host-homes-list' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Host
-            homes</a>
-          <a href="/homes"
-            class="<%= current_page === 'homes' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Homes</a>
-          <a href="/host/add-home"
-            class="<%= current_page === 'add-home' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">AddHome</a>
-          <a href="/bookings"
-            class="<%= current_page === 'bookings' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Bookings</a>
-          <a href="/favourites"
-            class="<%= current_page === 'favourites' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Favourites</a>
-          <form action="/logout" method="POST" class="inline">
-            <button type="submit"
-              class="text-gray-700 hover:text-rose-500 hover:bg-rose-50 px-3 py-1 rounded-md transition-all duration-300">Logout</button>
-          </form>
-          <% } else { %>
-            <div class="flex space-x-4">
-              <a href="/SignUp"
-                class="<%= current_page === 'SignUp' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">SignUp</a>
-              <a href="/login"
-                class="<%= current_page === 'login' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Login</a>
-            </div>
-            <% } %>
+          <% if(user && user.userType==='GUEST' ) { %>
+            <a href="/homes"
+              class="<%= current_page === 'homes' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Homes</a>
+            <a href="/bookings"
+              class="<%= current_page === 'bookings' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Bookings</a>
+            <a href="/favourites"
+              class="<%= current_page === 'favourites' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Favourites</a>
+            <form action="/logout" method="POST" class="inline">
+              <button type="submit"
+                class="text-gray-700 hover:text-rose-500 hover:bg-rose-50 px-3 py-1 rounded-md transition-all duration-300">Logout</button>
+            </form>
+            <% } else if(user && user.userType==='HOST' ) { %>
+              <a href="/host/add-home"
+                class="<%= current_page === 'add-home' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Add
+                Home</a>
+              <a href="/host/host-homes-list"
+                class="<%= current_page === 'host-homes-list' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Host
+                Homes</a>
+              <form action="/logout" method="POST" class="inline">
+                <button type="submit"
+                  class="text-gray-700 hover:text-rose-500 hover:bg-rose-50 px-3 py-1 rounded-md transition-all duration-300">Logout</button>
+              </form>
+              <% } %>
+                <% } else { %>
+                  <div class="flex space-x-4">
+                    <a href="/SignUp"
+                      class="<%= current_page === 'SignUp' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">SignUp</a>
+                    <a href="/login"
+                      class="<%= current_page === 'login' ? 'text-rose-500 font-semibold border-b-2 border-rose-500' : 'text-gray-700 hover:text-rose-500 transition-colors duration-300' %>">Login</a>
+                  </div>
+                  <% } %>
       </div>
     </div>
   </div>
